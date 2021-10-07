@@ -1,10 +1,26 @@
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import api from "../services/api";
 
 const Catalog = () => {
-  const cart = useSelector((state) => state);
-  console.log(cart);
+  const [catalog, setCatalog] = useState([]);
 
-  return <h1>Redux</h1>;
+  useEffect(() => {
+    api.get("products").then((response) => {
+      setCatalog(response.data);
+    });
+  }, []);
+
+  return (
+    <>
+      <h1>Catalog</h1>
+      {catalog.map((product) => (
+        <p key={product.id}>
+          {product.title}, <b>{product.price}</b>{" "}
+          <button type="button">Comprar</button>
+        </p>
+      ))}
+    </>
+  );
 };
 
 export default Catalog;

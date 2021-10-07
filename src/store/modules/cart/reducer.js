@@ -25,6 +25,10 @@ const cart = (state = INITIAL_STATE, action) => {
 
         break;
       }
+      case "ADD_PRODUCT_TO_CART_FAILURE": {
+        alert("produto sem estoque");
+        break;
+      }
       default: {
         return draft;
       }
